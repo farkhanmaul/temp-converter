@@ -95,8 +95,6 @@ const TemperatureConverter = () => {
 
         {/* Main Converter Card */}
         <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 p-6 sm:p-8 space-y-6 animate-scale-in">
-
-      <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-white mb-3">
               Enter Temperature
@@ -114,12 +112,12 @@ const TemperatureConverter = () => {
             <label className="block text-sm font-medium text-white mb-3">
               From Unit
             </label>
-            <div className="flex space-x-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {(['celsius', 'fahrenheit', 'kelvin'] as TemperatureUnit[]).map((unit, index) => (
                 <button
                   key={unit}
                   onClick={() => handleUnitChange(unit)}
-                  className={`flex-1 py-3 px-4 text-sm font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 ${
+                  className={`py-2.5 px-2 sm:py-3 sm:px-4 text-xs sm:text-sm font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 ${
                     fromUnit === unit
                       ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/50'
                       : 'bg-white/10 text-white border border-white/30 hover:bg-white/20'
@@ -136,35 +134,35 @@ const TemperatureConverter = () => {
             <h3 className="text-xl font-bold text-white">Results:</h3>
             
             <div className="grid gap-4">
-              <div className="flex justify-between items-center p-4 bg-gradient-to-r from-red-500/20 to-red-600/20 rounded-lg border border-red-500/30 backdrop-blur-sm transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                <div className="flex items-center space-x-3">
+              <div className="flex justify-between items-center p-3 sm:p-4 bg-gradient-to-r from-red-500/20 to-red-600/20 rounded-lg border border-red-500/30 backdrop-blur-sm transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                  <span className="font-semibold text-white">Celsius</span>
-                  <span className="text-red-300 text-sm">°C</span>
+                  <span className="font-semibold text-white text-sm sm:text-base">Celsius</span>
+                  <span className="text-red-300 text-xs sm:text-sm">°C</span>
                 </div>
-                <span className="text-2xl font-bold text-red-400 animate-number-change">
+                <span className="text-xl sm:text-2xl font-bold text-red-400 animate-number-change">
                   {results.celsius || '0.00'}
                 </span>
               </div>
               
-              <div className="flex justify-between items-center p-4 bg-gradient-to-r from-white/10 to-white/20 rounded-lg border border-white/30 backdrop-blur-sm transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                <div className="flex items-center space-x-3">
+              <div className="flex justify-between items-center p-3 sm:p-4 bg-gradient-to-r from-white/10 to-white/20 rounded-lg border border-white/30 backdrop-blur-sm transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
-                  <span className="font-semibold text-white">Fahrenheit</span>
-                  <span className="text-gray-300 text-sm">°F</span>
+                  <span className="font-semibold text-white text-sm sm:text-base">Fahrenheit</span>
+                  <span className="text-gray-300 text-xs sm:text-sm">°F</span>
                 </div>
-                <span className="text-2xl font-bold text-white animate-number-change">
+                <span className="text-xl sm:text-2xl font-bold text-white animate-number-change">
                   {results.fahrenheit || '32.00'}
                 </span>
               </div>
               
-              <div className="flex justify-between items-center p-4 bg-gradient-to-r from-gray-700/50 to-black/50 rounded-lg border border-gray-500/30 backdrop-blur-sm transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                <div className="flex items-center space-x-3">
+              <div className="flex justify-between items-center p-3 sm:p-4 bg-gradient-to-r from-gray-700/50 to-black/50 rounded-lg border border-gray-500/30 backdrop-blur-sm transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   <div className="w-3 h-3 bg-gray-400 rounded-full animate-pulse"></div>
-                  <span className="font-semibold text-white">Kelvin</span>
-                  <span className="text-gray-300 text-sm">K</span>
+                  <span className="font-semibold text-white text-sm sm:text-base">Kelvin</span>
+                  <span className="text-gray-300 text-xs sm:text-sm">K</span>
                 </div>
-                <span className="text-2xl font-bold text-gray-300 animate-number-change">
+                <span className="text-xl sm:text-2xl font-bold text-gray-300 animate-number-change">
                   {results.kelvin || '273.15'}
                 </span>
               </div>
@@ -180,8 +178,8 @@ const TemperatureConverter = () => {
         </div>
 
         {/* Footer */}
-        <div className="text-center mt-8 animate-fade-in-delay">
-          <p className="text-gray-400 text-xs">
+        <div className="text-center mt-6 sm:mt-8 animate-fade-in-delay">
+          <p className="text-gray-400 text-xs sm:text-sm px-4">
             Made with ❤️ by <span className="text-red-400 font-semibold">Farkhan Maul</span>
           </p>
         </div>
