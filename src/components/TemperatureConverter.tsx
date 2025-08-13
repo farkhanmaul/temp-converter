@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-type TemperatureUnit = 'celsius' | 'fahrenheit' | 'kelvin';
+type TemperatureUnit = 'celsius' | 'fahrenheit' | 'kelvin' | 'reamur';
 
 const TemperatureConverter = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -10,7 +10,8 @@ const TemperatureConverter = () => {
   const [results, setResults] = useState({
     celsius: '',
     fahrenheit: '',
-    kelvin: ''
+    kelvin: '',
+    reamur: ''
   });
 
   const convertTemperature = (value: number, from: TemperatureUnit) => {
@@ -26,14 +27,29 @@ const TemperatureConverter = () => {
       case 'kelvin':
         celsius = value - 273.15;
         break;
+      case 'reamur':
+        celsius = value * 5/4;
+        break;
       default:
         celsius = value;
+    }
+
+    // Validate absolute zero for Kelvin (minimum -273.15°C)
+    const kelvinValue = celsius + 273.15;
+    if (kelvinValue < 0) {
+      return {
+        celsius: 'Below Absolute Zero!',
+        fahrenheit: 'Below Absolute Zero!',
+        kelvin: 'Below Absolute Zero!',
+        reamur: 'Below Absolute Zero!'
+      };
     }
 
     return {
       celsius: celsius,
       fahrenheit: celsius * 9/5 + 32,
-      kelvin: celsius + 273.15
+      kelvin: kelvinValue,
+      reamur: celsius * 4/5
     };
   };
 
@@ -41,7 +57,7 @@ const TemperatureConverter = () => {
     setInputValue(value);
     
     if (value === '' || isNaN(Number(value))) {
-      setResults({ celsius: '', fahrenheit: '', kelvin: '' });
+      setResults({ celsius: '', fahrenheit: '', kelvin: '', reamur: '' });
       return;
     }
 
@@ -49,9 +65,10 @@ const TemperatureConverter = () => {
     const converted = convertTemperature(numValue, fromUnit);
 
     setResults({
-      celsius: converted.celsius.toFixed(2),
-      fahrenheit: converted.fahrenheit.toFixed(2),
-      kelvin: converted.kelvin.toFixed(2)
+      celsius: typeof converted.celsius === 'number' ? converted.celsius.toFixed(2) : converted.celsius,
+      fahrenheit: typeof converted.fahrenheit === 'number' ? converted.fahrenheit.toFixed(2) : converted.fahrenheit,
+      kelvin: typeof converted.kelvin === 'number' ? converted.kelvin.toFixed(2) : converted.kelvin,
+      reamur: typeof converted.reamur === 'number' ? converted.reamur.toFixed(2) : converted.reamur
     });
   };
 
@@ -62,16 +79,17 @@ const TemperatureConverter = () => {
       const converted = convertTemperature(numValue, unit);
       
       setResults({
-        celsius: converted.celsius.toFixed(2),
-        fahrenheit: converted.fahrenheit.toFixed(2),
-        kelvin: converted.kelvin.toFixed(2)
+        celsius: typeof converted.celsius === 'number' ? converted.celsius.toFixed(2) : converted.celsius,
+        fahrenheit: typeof converted.fahrenheit === 'number' ? converted.fahrenheit.toFixed(2) : converted.fahrenheit,
+        kelvin: typeof converted.kelvin === 'number' ? converted.kelvin.toFixed(2) : converted.kelvin,
+        reamur: typeof converted.reamur === 'number' ? converted.reamur.toFixed(2) : converted.reamur
       });
     }
   };
 
   const resetConverter = () => {
     setInputValue('');
-    setResults({ celsius: '', fahrenheit: '', kelvin: '' });
+    setResults({ celsius: '', fahrenheit: '', kelvin: '', reamur: '' });
     setFromUnit('celsius');
   };
 
@@ -112,12 +130,12 @@ const TemperatureConverter = () => {
             <label className="block text-sm font-medium text-white mb-3">
               From Unit
             </label>
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              {(['celsius', 'fahrenheit', 'kelvin'] as TemperatureUnit[]).map((unit, index) => (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {(['celsius', 'fahrenheit', 'kelvin', 'reamur'] as TemperatureUnit[]).map((unit, index) => (
                 <button
                   key={unit}
                   onClick={() => handleUnitChange(unit)}
-                  className={`py-2.5 px-2 sm:py-3 sm:px-4 text-xs sm:text-sm font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 ${
+                  className={`py-2 px-1 sm:py-3 sm:px-2 text-xs sm:text-sm font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 ${
                     fromUnit === unit
                       ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/50'
                       : 'bg-white/10 text-white border border-white/30 hover:bg-white/20'
@@ -166,6 +184,17 @@ const TemperatureConverter = () => {
                   {results.kelvin || '273.15'}
                 </span>
               </div>
+              
+              <div className="flex justify-between items-center p-3 sm:p-4 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-lg border border-yellow-500/30 backdrop-blur-sm transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
+                  <span className="font-semibold text-white text-sm sm:text-base">Réaumur</span>
+                  <span className="text-yellow-300 text-xs sm:text-sm">°Ré</span>
+                </div>
+                <span className="text-xl sm:text-2xl font-bold text-yellow-400 animate-number-change">
+                  {results.reamur || '0.00'}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -180,7 +209,7 @@ const TemperatureConverter = () => {
         {/* Footer */}
         <div className="text-center mt-6 sm:mt-8 animate-fade-in-delay">
           <p className="text-gray-400 text-xs sm:text-sm px-4">
-            Made with ❤️ by <span className="text-red-400 font-semibold">Farkhan Maul</span>
+            ⚓ Captained by <span className="text-red-400 font-semibold">Farkhan Maul</span> • ⚡ Powered by <span className="text-blue-400 font-semibold">Claude AI</span>
           </p>
         </div>
       </div>
