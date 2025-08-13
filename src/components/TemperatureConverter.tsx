@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 type TemperatureUnit = 'celsius' | 'fahrenheit' | 'kelvin' | 'reamur';
 
 const TemperatureConverter = () => {
+  const [mounted, setMounted] = useState(false);
   const [inputValue, setInputValue] = useState<string>('');
   const [fromUnit, setFromUnit] = useState<TemperatureUnit>('celsius');
   const [results, setResults] = useState({
@@ -13,6 +14,18 @@ const TemperatureConverter = () => {
     kelvin: '',
     reamur: ''
   });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="h-screen bg-gradient-to-br from-black via-gray-900 to-red-900 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   const convertTemperature = (value: number, from: TemperatureUnit) => {
     let celsius: number;
@@ -143,7 +156,6 @@ const TemperatureConverter = () => {
                         ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg'
                         : 'bg-white/10 text-white border border-white/30 hover:bg-white/20'
                     }`}
-                    style={{animationDelay: `${index * 50}ms`}}
                   >
                     {unit === 'celsius' ? 'C' : unit === 'fahrenheit' ? 'F' : unit === 'kelvin' ? 'K' : 'R'}
                   </button>
