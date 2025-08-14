@@ -13,8 +13,8 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 18,
-          background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+          fontSize: 20,
+          background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -22,10 +22,10 @@ export default function Icon() {
           justifyContent: 'center',
           color: 'white',
           fontWeight: 'bold',
-          borderRadius: '8px',
+          borderRadius: '6px',
         }}
       >
-        F
+        🌡️
       </div>
     ),
     {

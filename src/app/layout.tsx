@@ -2,22 +2,32 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Temperature Converter by Farkhan Maul | Celsius Fahrenheit Kelvin",
-  description: "Professional temperature converter tool by Farkhan Maul. Convert between Celsius, Fahrenheit, and Kelvin with real-time calculations. Modern, responsive design with glassmorphism effects.",
-  keywords: "temperature converter, celsius to fahrenheit, kelvin converter, temperature calculator, Farkhan Maul, thermometer tool",
-  authors: [{ name: "Farkhan Maul" }],
+  title: "FarkhanTherm | Instant & Accurate Temperature Conversions",
+  description: "🌡️ Convert temperatures instantly between Celsius, Fahrenheit, Kelvin & Réaumur. Professional tool with interactive slider, range tables & dark mode. Built by @farkhanmaul with Claude AI.",
+  keywords: "temperature converter, celsius fahrenheit, kelvin converter, temperature calculator, réaumur, thermometer tool, instant conversion, professional converter",
+  authors: [{ name: "Farkhan Maul", url: "https://github.com/farkhanmaul" }],
   creator: "Farkhan Maul",
   openGraph: {
-    title: "Temperature Converter by Farkhan Maul",
-    description: "Convert between Celsius, Fahrenheit, and Kelvin with this modern, responsive temperature converter tool.",
+    title: "FarkhanTherm - Instant & Accurate Temperature Converter",
+    description: "🌡️ Professional temperature converter with 4 scales, interactive features & beautiful design",
     type: "website",
-    url: "https://farkhanmaul.github.io/temp-converter",
-    siteName: "Temperature Converter",
+    siteName: "FarkhanTherm",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FarkhanTherm",
+    description: "🌡️ Convert temperatures instantly & accurately",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' }
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
   },
 };
 
