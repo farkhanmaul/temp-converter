@@ -292,15 +292,15 @@ const TemperatureConverter = () => {
         </div>
       </div>
 
-      <div className="max-w-4xl w-full mx-auto">
+      <div className="max-w-4xl w-full mx-auto px-4">
         {/* Main Input Card */}
         <div className={`rounded-xl shadow-lg border p-4 sm:p-6 transition-all duration-300 ${
           darkMode 
             ? 'bg-gray-800 border-gray-700' 
             : 'bg-white border-gray-200'
         }`}>
-          {/* Input and Unit Selection Row */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+          {/* Input and Unit Selection - Stack on mobile */}
+          <div className="space-y-6">
             <div className="space-y-3">
               <label className={`block text-sm font-medium mb-2 ${
                 darkMode ? 'text-white' : 'text-gray-700'
@@ -379,30 +379,31 @@ const TemperatureConverter = () => {
               }`}>
                 From Unit
               </label>
-              <div className="grid grid-cols-4 gap-1">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {(['celsius', 'fahrenheit', 'kelvin', 'reamur'] as TemperatureUnit[]).map((unit) => (
                   <button
                     key={unit}
                     onClick={() => handleUnitChange(unit)}
-                    className={`py-2 px-3 text-sm font-medium rounded-lg transition-colors cursor-pointer ${
+                    className={`py-3 px-4 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
                       fromUnit === unit
-                        ? 'bg-blue-500 text-white shadow-md'
+                        ? 'bg-blue-500 text-white shadow-md transform scale-105'
                         : darkMode
-                          ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                          ? 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:scale-105'
+                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-105'
                     }`}
                   >
-                    {unit === 'celsius' ? 'C' : unit === 'fahrenheit' ? 'F' : unit === 'kelvin' ? 'K' : 'Ré'}
+                    {unit === 'celsius' ? '°C' : unit === 'fahrenheit' ? '°F' : unit === 'kelvin' ? 'K' : '°Ré'}
                   </button>
                 ))}
               </div>
-              <div className="flex gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <button
                   onClick={() => {
                     setShowRangeTable(!showRangeTable);
                     if (showInfo) setShowInfo(false);
+                    if (showCredits) setShowCredits(false);
                   }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all text-sm cursor-pointer ${
                     showRangeTable 
                       ? darkMode
                         ? 'bg-blue-600 text-white shadow-lg'
@@ -413,7 +414,8 @@ const TemperatureConverter = () => {
                   }`}
                 >
                   <span>📊</span>
-                  <span>Range Table</span>
+                  <span className="hidden sm:inline">Range Table</span>
+                  <span className="sm:hidden">Range</span>
                 </button>
                 <button
                   onClick={() => {
@@ -421,7 +423,7 @@ const TemperatureConverter = () => {
                     if (showRangeTable) setShowRangeTable(false);
                     if (showCredits) setShowCredits(false);
                   }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all text-sm cursor-pointer ${
                     showInfo 
                       ? darkMode
                         ? 'bg-purple-600 text-white shadow-lg'
@@ -432,17 +434,16 @@ const TemperatureConverter = () => {
                   }`}
                 >
                   <span>ℹ️</span>
-                  <span>Scale Info</span>
+                  <span className="hidden sm:inline">Scale Info</span>
+                  <span className="sm:hidden">Info</span>
                 </button>
-              </div>
-              <div className="flex gap-3 mt-3">
                 <button
                   onClick={() => {
                     setShowCredits(!showCredits);
                     if (showRangeTable) setShowRangeTable(false);
                     if (showInfo) setShowInfo(false);
                   }}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all text-sm cursor-pointer ${
                     showCredits 
                       ? darkMode
                         ? 'bg-green-600 text-white shadow-lg'
@@ -453,7 +454,8 @@ const TemperatureConverter = () => {
                   }`}
                 >
                   <span>🎉</span>
-                  <span>Fun Facts</span>
+                  <span className="hidden sm:inline">Fun Facts</span>
+                  <span className="sm:hidden">Facts</span>
                 </button>
               </div>
             </div>
