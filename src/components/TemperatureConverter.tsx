@@ -209,16 +209,16 @@ const TemperatureConverter = () => {
             ? 'bg-gray-800 border-gray-700' 
             : 'bg-white border-gray-200'
         }`}>
-          {/* Compact Header */}
+          {/* Main Title - Always Centered */}
           <div className="text-center mb-8">
             <div className="mb-6">
-              <h1 className={`text-2xl sm:text-3xl font-bold mb-2 ${
+              <h1 className={`text-2xl sm:text-3xl font-bold mb-2 transition-colors duration-300 ${
                 darkMode ? 'text-white' : 'text-gray-900'
               }`}>
-                <span className="hidden sm:inline">FarkhanTherm</span>
-                <span className="sm:hidden">FTherm</span>
+                <span className="hidden sm:inline">🌡️ Temperature Converter</span>
+                <span className="sm:hidden">🌡️ Temp Convert</span>
               </h1>
-              <p className={`text-sm sm:text-lg ${
+              <p className={`text-sm sm:text-lg transition-colors duration-300 ${
                 darkMode ? 'text-gray-400' : 'text-gray-600'
               }`}>
                 <span className="hidden sm:inline">Convert temperatures instantly & accurately</span>
@@ -366,46 +366,72 @@ const TemperatureConverter = () => {
 
         </div>
 
-        {/* Full Width Temperature Scale Info */}
+        {/* Temperature Scale Info Popup */}
         {showInfo && (
-            <div className={`mb-6 rounded-xl border shadow-lg overflow-hidden ${
-              darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-            }`}>
-              <div className={`px-6 py-4 border-b ${
-                darkMode ? 'bg-purple-600 border-purple-500' : 'bg-purple-500 border-purple-400'
+          <>
+            {/* Overlay */}
+            <div 
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-all duration-300 ease-in-out"
+              onClick={() => setShowInfo(false)}
+            />
+            
+            {/* Popup */}
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <div className={`max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-xl border shadow-2xl transform transition-all duration-300 ease-out scale-100 ${
+                darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
               }`}>
-                <h3 className="text-white font-semibold flex items-center gap-2">
-                  <span>ℹ️</span>
-                  <span>Temperature Scale Reference</span>
-                </h3>
-              </div>
-              <div className="p-6">
-                <div className="grid gap-4">
-                  {Object.entries(temperatureInfo).map(([key, info]) => (
-                    <div key={key} className={`p-4 rounded-lg border ${
-                      darkMode ? 'bg-gray-700/50 border-gray-600' : 'bg-gray-50 border-gray-200'
-                    }`}>
-                      <div className={`font-semibold text-sm mb-2 ${
-                        darkMode ? 'text-white' : 'text-gray-900'
-                      }`}>
-                        {info.name} ({info.symbol})
+                <div className={`px-6 py-4 border-b flex items-center justify-between ${
+                  darkMode ? 'bg-purple-600 border-purple-500' : 'bg-purple-500 border-purple-400'
+                }`}>
+                  <h3 className="text-white font-semibold flex items-center gap-2">
+                    <span>ℹ️</span>
+                    <span>Temperature Scale Reference</span>
+                  </h3>
+                  <button
+                    onClick={() => setShowInfo(false)}
+                    className="text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+                  <div className="grid gap-4">
+                    {Object.entries(temperatureInfo).map(([key, info], index) => (
+                      <div 
+                        key={key} 
+                        className={`p-4 rounded-lg border transform transition-all duration-300 ease-out ${
+                          darkMode ? 'bg-gray-700/50 border-gray-600' : 'bg-gray-50 border-gray-200'
+                        }`}
+                        style={{
+                          animationDelay: `${index * 100}ms`,
+                          animation: 'slideInUp 0.5s ease-out forwards'
+                        }}
+                      >
+                        <div className={`font-semibold text-sm mb-2 ${
+                          darkMode ? 'text-white' : 'text-gray-900'
+                        }`}>
+                          {info.name} ({info.symbol})
+                        </div>
+                        <p className={`text-sm leading-relaxed mb-2 ${
+                          darkMode ? 'text-gray-300' : 'text-gray-600'
+                        }`}>
+                          {info.description}
+                        </p>
+                        <div className={`text-xs space-y-1 ${
+                          darkMode ? 'text-gray-400' : 'text-gray-500'
+                        }`}>
+                          <div><strong>Formula:</strong> {info.formula}</div>
+                          <div><strong>Origin:</strong> {info.origin}</div>
+                        </div>
                       </div>
-                      <p className={`text-sm leading-relaxed mb-2 ${
-                        darkMode ? 'text-gray-300' : 'text-gray-600'
-                      }`}>
-                        {info.description}
-                      </p>
-                      <div className={`text-xs space-y-1 ${
-                        darkMode ? 'text-gray-400' : 'text-gray-500'
-                      }`}>
-                        <div><strong>Formula:</strong> {info.formula}</div>
-                        <div><strong>Origin:</strong> {info.origin}</div>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
+          </>
         )}
 
         {/* Results Section - New Card */}
@@ -476,96 +502,124 @@ const TemperatureConverter = () => {
           </div>
         </div>
 
-        {/* Full Width Range Table */}
+        {/* Range Table Popup */}
         {showRangeTable && (
-            <div className={`mb-6 rounded-xl border shadow-lg overflow-hidden ${
-              darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-            }`}>
-              <div className={`px-6 py-4 border-b ${
-                darkMode ? 'bg-blue-600 border-blue-500' : 'bg-blue-500 border-blue-400'
+          <>
+            {/* Overlay */}
+            <div 
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-all duration-300 ease-in-out"
+              onClick={() => setShowRangeTable(false)}
+            />
+            
+            {/* Popup */}
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <div className={`max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-xl border shadow-2xl transform transition-all duration-300 ease-out scale-100 ${
+                darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
               }`}>
-                <h3 className="text-white font-semibold flex items-center gap-2">
-                  <span>📊</span>
-                  <span>Temperature Range Converter</span>
-                </h3>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="flex items-center gap-2">
-                    <label className={`text-sm font-medium ${
-                      darkMode ? 'text-gray-300' : 'text-gray-700'
-                    }`}>From:</label>
-                    <input
-                      type="number"
-                      value={rangeStart}
-                      onChange={(e) => setRangeStart(e.target.value)}
-                      className={`w-20 px-3 py-2 text-sm rounded-lg border font-medium ${
-                        darkMode 
-                          ? 'bg-gray-700 border-gray-600 text-white' 
-                          : 'bg-white border-gray-300 text-gray-900'
-                      }`}
-                    />
-                    <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>°C</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <label className={`text-sm font-medium ${
-                      darkMode ? 'text-gray-300' : 'text-gray-700'
-                    }`}>To:</label>
-                    <input
-                      type="number"
-                      value={rangeEnd}
-                      onChange={(e) => setRangeEnd(e.target.value)}
-                      className={`w-20 px-3 py-2 text-sm rounded-lg border font-medium ${
-                        darkMode 
-                          ? 'bg-gray-700 border-gray-600 text-white' 
-                          : 'bg-white border-gray-300 text-gray-900'
-                      }`}
-                    />
-                    <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>°C</span>
-                  </div>
-                </div>
-                <div className={`rounded-lg border overflow-hidden ${
-                  darkMode ? 'border-gray-600' : 'border-gray-300'
+                <div className={`px-6 py-4 border-b flex items-center justify-between ${
+                  darkMode ? 'bg-blue-600 border-blue-500' : 'bg-blue-500 border-blue-400'
                 }`}>
-                  <div className={`max-h-64 overflow-y-auto ${
-                    darkMode ? 'bg-gray-700' : 'bg-gray-50'
-                  }`}>
-                    <table className="w-full text-sm">
-                      <thead className={`sticky top-0 ${
-                        darkMode ? 'bg-gray-800' : 'bg-gray-200'
-                      }`}>
-                        <tr>
-                          <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Celsius</th>
-                          <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Fahrenheit</th>
-                          <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Kelvin</th>
-                          <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Réaumur</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {generateRangeTable().map((row, index) => (
-                          <tr key={index} className={`border-t ${
-                            darkMode ? 'border-gray-600 hover:bg-gray-650' : 'border-gray-200 hover:bg-white'
-                          }`}>
-                            <td className={`px-4 py-3 font-medium ${
-                              darkMode ? 'text-red-400' : 'text-red-600'
-                            }`}>{row.celsius}°C</td>
-                            <td className={`px-4 py-3 font-medium ${
-                              darkMode ? 'text-blue-400' : 'text-blue-600'
-                            }`}>{row.fahrenheit}°F</td>
-                            <td className={`px-4 py-3 font-medium ${
-                              darkMode ? 'text-gray-300' : 'text-gray-700'
-                            }`}>{row.kelvin}K</td>
-                            <td className={`px-4 py-3 font-medium ${
-                              darkMode ? 'text-yellow-400' : 'text-yellow-600'
-                            }`}>{row.reamur}°Ré</td>
+                  <h3 className="text-white font-semibold flex items-center gap-2">
+                    <span>📊</span>
+                    <span>Temperature Range Converter</span>
+                  </h3>
+                  <button
+                    onClick={() => setShowRangeTable(false)}
+                    className="text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+                  <div className="flex items-center gap-4 mb-4 opacity-0 animate-slideInUp" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
+                    <div className="flex items-center gap-2">
+                      <label className={`text-sm font-medium ${
+                        darkMode ? 'text-gray-300' : 'text-gray-700'
+                      }`}>From:</label>
+                      <input
+                        type="number"
+                        value={rangeStart}
+                        onChange={(e) => setRangeStart(e.target.value)}
+                        className={`w-20 px-3 py-2 text-sm rounded-lg border font-medium transition-all duration-200 focus:ring-2 focus:ring-blue-400 ${
+                          darkMode 
+                            ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-400' 
+                            : 'bg-white border-gray-300 text-gray-900 focus:border-blue-400'
+                        }`}
+                      />
+                      <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>°C</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <label className={`text-sm font-medium ${
+                        darkMode ? 'text-gray-300' : 'text-gray-700'
+                      }`}>To:</label>
+                      <input
+                        type="number"
+                        value={rangeEnd}
+                        onChange={(e) => setRangeEnd(e.target.value)}
+                        className={`w-20 px-3 py-2 text-sm rounded-lg border font-medium transition-all duration-200 focus:ring-2 focus:ring-blue-400 ${
+                          darkMode 
+                            ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-400' 
+                            : 'bg-white border-gray-300 text-gray-900 focus:border-blue-400'
+                        }`}
+                      />
+                      <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>°C</span>
+                    </div>
+                  </div>
+                  <div className={`rounded-lg border overflow-hidden opacity-0 animate-slideInUp ${
+                    darkMode ? 'border-gray-600' : 'border-gray-300'
+                  }`} style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
+                    <div className={`max-h-64 overflow-y-auto ${
+                      darkMode ? 'bg-gray-700' : 'bg-gray-50'
+                    }`}>
+                      <table className="w-full text-sm">
+                        <thead className={`sticky top-0 ${
+                          darkMode ? 'bg-gray-800' : 'bg-gray-200'
+                        }`}>
+                          <tr>
+                            <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Celsius</th>
+                            <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Fahrenheit</th>
+                            <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Kelvin</th>
+                            <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Réaumur</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {generateRangeTable().map((row, index) => (
+                            <tr 
+                              key={index} 
+                              className={`border-t transition-all duration-200 hover:scale-[1.01] ${
+                                darkMode ? 'border-gray-600 hover:bg-gray-600/50' : 'border-gray-200 hover:bg-blue-50'
+                              }`}
+                              style={{
+                                animationDelay: `${300 + index * 50}ms`,
+                                animation: 'fadeInScale 0.4s ease-out forwards',
+                                opacity: 0,
+                                transform: 'scale(0.95)'
+                              }}
+                            >
+                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
+                                darkMode ? 'text-red-400' : 'text-red-600'
+                              }`}>{row.celsius}°C</td>
+                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
+                                darkMode ? 'text-blue-400' : 'text-blue-600'
+                              }`}>{row.fahrenheit}°F</td>
+                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
+                                darkMode ? 'text-gray-300' : 'text-gray-700'
+                              }`}>{row.kelvin}K</td>
+                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
+                                darkMode ? 'text-yellow-400' : 'text-yellow-600'
+                              }`}>{row.reamur}°Ré</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </>
         )}
 
         {/* Reset and Credits Section */}
