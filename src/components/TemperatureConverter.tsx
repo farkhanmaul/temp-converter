@@ -295,7 +295,7 @@ const TemperatureConverter = () => {
             : 'bg-white border-gray-200'
         }`}>
           {/* Input and Unit Selection Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
             <div className="space-y-3">
               <label className={`block text-sm font-medium mb-2 ${
                 darkMode ? 'text-white' : 'text-gray-700'
@@ -700,17 +700,17 @@ const TemperatureConverter = () => {
                     </svg>
                   </button>
                 </div>
-                <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
-                  <div className="flex items-center gap-4 mb-4 opacity-0 animate-slideInUp" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
+                <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 opacity-0 animate-slideInUp" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
                     <div className="flex items-center gap-2">
-                      <label className={`text-sm font-medium ${
+                      <label className={`text-sm font-medium whitespace-nowrap ${
                         darkMode ? 'text-gray-300' : 'text-gray-700'
                       }`}>From:</label>
                       <input
                         type="number"
                         value={rangeStart}
                         onChange={(e) => setRangeStart(e.target.value)}
-                        className={`w-20 px-3 py-2 text-sm rounded-lg border font-medium transition-all duration-200 focus:ring-2 focus:ring-blue-400 ${
+                        className={`w-24 px-3 py-2 text-sm rounded-lg border font-medium transition-all duration-200 focus:ring-2 focus:ring-blue-400 ${
                           darkMode 
                             ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-400' 
                             : 'bg-white border-gray-300 text-gray-900 focus:border-blue-400'
@@ -719,14 +719,14 @@ const TemperatureConverter = () => {
                       <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>°C</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <label className={`text-sm font-medium ${
+                      <label className={`text-sm font-medium whitespace-nowrap ${
                         darkMode ? 'text-gray-300' : 'text-gray-700'
                       }`}>To:</label>
                       <input
                         type="number"
                         value={rangeEnd}
                         onChange={(e) => setRangeEnd(e.target.value)}
-                        className={`w-20 px-3 py-2 text-sm rounded-lg border font-medium transition-all duration-200 focus:ring-2 focus:ring-blue-400 ${
+                        className={`w-24 px-3 py-2 text-sm rounded-lg border font-medium transition-all duration-200 focus:ring-2 focus:ring-blue-400 ${
                           darkMode 
                             ? 'bg-gray-700 border-gray-600 text-white focus:border-blue-400' 
                             : 'bg-white border-gray-300 text-gray-900 focus:border-blue-400'
@@ -738,20 +738,21 @@ const TemperatureConverter = () => {
                   <div className={`rounded-lg border overflow-hidden opacity-0 animate-slideInUp ${
                     darkMode ? 'border-gray-600' : 'border-gray-300'
                   }`} style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-                    <div className={`max-h-64 overflow-y-auto ${
-                      darkMode ? 'bg-gray-700' : 'bg-gray-50'
-                    }`}>
-                      <table className="w-full text-sm">
-                        <thead className={`sticky top-0 ${
-                          darkMode ? 'bg-gray-800' : 'bg-gray-200'
-                        }`}>
-                          <tr>
-                            <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Celsius</th>
-                            <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Fahrenheit</th>
-                            <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Kelvin</th>
-                            <th className={`px-4 py-3 text-left font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Réaumur</th>
-                          </tr>
-                        </thead>
+                    <div className="overflow-x-auto">
+                      <div className={`max-h-80 overflow-y-auto ${
+                        darkMode ? 'bg-gray-700' : 'bg-gray-50'
+                      }`}>
+                        <table className="w-full text-sm min-w-full">
+                          <thead className={`sticky top-0 z-10 ${
+                            darkMode ? 'bg-gray-800 shadow-md' : 'bg-gray-200 shadow-sm'
+                          }`}>
+                            <tr>
+                              <th className={`px-3 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>Celsius</th>
+                              <th className={`px-3 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>Fahrenheit</th>
+                              <th className={`px-3 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>Kelvin</th>
+                              <th className={`px-3 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>Réaumur</th>
+                            </tr>
+                          </thead>
                         <tbody>
                           {generateRangeTable().map((row, index) => (
                             <tr 
@@ -766,16 +767,16 @@ const TemperatureConverter = () => {
                                 transform: 'scale(0.95)'
                               }}
                             >
-                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
+                              <td className={`px-3 py-3 font-medium transition-colors duration-200 whitespace-nowrap ${
                                 darkMode ? 'text-red-400' : 'text-red-600'
                               }`}>{row.celsius}°C</td>
-                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
+                              <td className={`px-3 py-3 font-medium transition-colors duration-200 whitespace-nowrap ${
                                 darkMode ? 'text-blue-400' : 'text-blue-600'
                               }`}>{row.fahrenheit}°F</td>
-                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
+                              <td className={`px-3 py-3 font-medium transition-colors duration-200 whitespace-nowrap ${
                                 darkMode ? 'text-gray-300' : 'text-gray-700'
                               }`}>{row.kelvin}K</td>
-                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
+                              <td className={`px-3 py-3 font-medium transition-colors duration-200 whitespace-nowrap ${
                                 darkMode ? 'text-yellow-400' : 'text-yellow-600'
                               }`}>{row.reamur}°Ré</td>
                             </tr>
