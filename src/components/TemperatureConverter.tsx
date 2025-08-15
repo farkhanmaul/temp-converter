@@ -792,7 +792,6 @@ const TemperatureConverter = () => {
                   </div>
                 </div>
               </div>
-            </div>
           </>
         )}
 
