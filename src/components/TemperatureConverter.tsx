@@ -227,7 +227,7 @@ const TemperatureConverter = () => {
       darkMode 
         ? 'bg-gray-900' 
         : 'bg-gray-50'
-    } flex items-center justify-center p-4 relative`}>
+    } relative`}>
       {/* Dark Mode Toggle - Fixed Position */}
       <div className="fixed top-4 right-4 z-50">
         <button
@@ -246,8 +246,10 @@ const TemperatureConverter = () => {
         </button>
       </div>
       
-      {/* Main Title - Outside of card */}
-      <div className="text-center mb-6 sm:mb-8 max-w-4xl w-full mx-auto px-4">
+      {/* Main Content Container */}
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
+        {/* Main Title - At the top */}
+        <div className="text-center mb-8">
         <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 transition-colors duration-300 ${
           darkMode ? 'text-white' : 'text-gray-900'
         }`}>
@@ -292,7 +294,6 @@ const TemperatureConverter = () => {
         </div>
       </div>
 
-      <div className="max-w-4xl w-full mx-auto px-4">
         {/* Main Input Card */}
         <div className={`rounded-xl shadow-lg border p-4 sm:p-6 transition-all duration-300 ${
           darkMode 
@@ -301,8 +302,9 @@ const TemperatureConverter = () => {
         }`}>
           {/* Input and Unit Selection - Stack on mobile */}
           <div className="space-y-6">
-            <div className="space-y-3">
-              <label className={`block text-sm font-medium mb-2 ${
+            {/* Temperature Input Section */}
+            <div className="space-y-4">
+              <label className={`block text-sm font-medium ${
                 darkMode ? 'text-white' : 'text-gray-700'
               }`}>
                 Enter Temperature Value
@@ -312,7 +314,7 @@ const TemperatureConverter = () => {
                 value={inputValue}
                 onChange={(e) => handleInputChange(e.target.value)}
                 placeholder="Enter value"
-                className={`w-full px-3 py-2 border rounded-lg transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 ${
+                className={`w-full px-4 py-3 border rounded-lg transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-lg ${
                   darkMode 
                     ? 'bg-white/10 border-white/30 text-white placeholder-gray-300' 
                     : 'bg-white/90 border-gray-300 text-gray-800 placeholder-gray-500'
@@ -373,8 +375,9 @@ const TemperatureConverter = () => {
               </div>
             </div>
 
-            <div className="space-y-3">
-              <label className={`block text-sm font-medium mb-2 ${
+            {/* Unit Selection Section */}
+            <div className="space-y-4">
+              <label className={`block text-sm font-medium ${
                 darkMode ? 'text-white' : 'text-gray-700'
               }`}>
                 From Unit
