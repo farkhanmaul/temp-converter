@@ -44,6 +44,49 @@ const temperatureInfo: Record<TemperatureUnit, TemperatureInfo> = {
   },
 };
 
+const temperatureFunFacts = [
+  {
+    emoji: '🥶',
+    fact: 'Absolute zero (-273.15°C) is the coldest possible temperature where all molecular motion stops!'
+  },
+  {
+    emoji: '☀️',
+    fact: 'The Sun\'s core temperature reaches about 15 million°C - hot enough to fuse hydrogen atoms!'
+  },
+  {
+    emoji: '🌡️',
+    fact: 'Mercury thermometers can measure temperatures from -39°C to 357°C before the mercury freezes or boils.'
+  },
+  {
+    emoji: '❄️',
+    fact: 'Antarctica\'s lowest recorded temperature is -89.2°C (-128.6°F) at Vostok Station in 1983.'
+  },
+  {
+    emoji: '🔥',
+    fact: 'Lightning can reach temperatures of 30,000°C - 5 times hotter than the Sun\'s surface!'
+  },
+  {
+    emoji: '🧊',
+    fact: 'Ice actually has 19 different crystal structures depending on temperature and pressure conditions.'
+  },
+  {
+    emoji: '🌊',
+    fact: 'Water has its maximum density at 4°C, which is why ice floats on water!'
+  },
+  {
+    emoji: '🦅',
+    fact: 'Birds have higher body temperatures than humans - typically around 40-42°C (104-108°F).'
+  },
+  {
+    emoji: '🏜️',
+    fact: 'The hottest air temperature ever recorded on Earth was 54.4°C (129.9°F) in Death Valley, California.'
+  },
+  {
+    emoji: '🌌',
+    fact: 'Outer space temperature is about 2.7 Kelvin (-270.45°C), just slightly above absolute zero!'
+  }
+];
+
 const TemperatureConverter = () => {
   const [mounted, setMounted] = useState(false);
   const [inputValue, setInputValue] = useState<string>('');
@@ -202,30 +245,55 @@ const TemperatureConverter = () => {
           </div>
         </button>
       </div>
+      
+      {/* Main Title - Outside of card */}
+      <div className="text-center mb-8 max-w-4xl w-full mx-auto">
+        <h1 className={`text-3xl sm:text-4xl font-bold mb-3 transition-colors duration-300 ${
+          darkMode ? 'text-white' : 'text-gray-900'
+        }`}>
+          🌡️ Temperature Converter
+        </h1>
+        <p className={`text-sm sm:text-lg transition-colors duration-300 ${
+          darkMode ? 'text-gray-400' : 'text-gray-600'
+        }`}>
+          Convert temperatures instantly & accurately
+        </p>
+        {/* Small Credits */}
+        <p className={`text-xs mt-2 transition-colors duration-300 ${
+          darkMode ? 'text-gray-500' : 'text-gray-400'
+        }`}>
+          Built by{' '}
+          <a 
+            href="https://github.com/farkhanmaul" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={`font-medium hover:underline transition-colors ${
+              darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
+            }`}
+          >
+            @farkhanmaul
+          </a>
+          {' '}• Powered by{' '}
+          <a 
+            href="https://claude.ai" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={`font-medium hover:underline transition-colors ${
+              darkMode ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'
+            }`}
+          >
+            Claude AI
+          </a>
+        </p>
+      </div>
+
       <div className="max-w-4xl w-full mx-auto">
-        {/* Compact Main Card with Integrated Header */}
+        {/* Main Input Card */}
         <div className={`rounded-xl shadow-lg border p-4 sm:p-6 transition-all duration-300 ${
           darkMode 
             ? 'bg-gray-800 border-gray-700' 
             : 'bg-white border-gray-200'
         }`}>
-          {/* Main Title - Always Centered */}
-          <div className="text-center mb-8">
-            <div className="mb-6">
-              <h1 className={`text-2xl sm:text-3xl font-bold mb-2 transition-colors duration-300 ${
-                darkMode ? 'text-white' : 'text-gray-900'
-              }`}>
-                <span className="hidden sm:inline">🌡️ Temperature Converter</span>
-                <span className="sm:hidden">🌡️ Temp Convert</span>
-              </h1>
-              <p className={`text-sm sm:text-lg transition-colors duration-300 ${
-                darkMode ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                <span className="hidden sm:inline">Convert temperatures instantly & accurately</span>
-                <span className="sm:hidden">Instant temperature conversion</span>
-              </p>
-            </div>
-          </div>
           {/* Input and Unit Selection Row */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
             <div className="space-y-3">
@@ -346,6 +414,7 @@ const TemperatureConverter = () => {
                   onClick={() => {
                     setShowInfo(!showInfo);
                     if (showRangeTable) setShowRangeTable(false);
+                    if (showCredits) setShowCredits(false);
                   }}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm cursor-pointer ${
                     showInfo 
@@ -359,6 +428,27 @@ const TemperatureConverter = () => {
                 >
                   <span>ℹ️</span>
                   <span>Scale Info</span>
+                </button>
+              </div>
+              <div className="flex gap-3 mt-3">
+                <button
+                  onClick={() => {
+                    setShowCredits(!showCredits);
+                    if (showRangeTable) setShowRangeTable(false);
+                    if (showInfo) setShowInfo(false);
+                  }}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm cursor-pointer ${
+                    showCredits 
+                      ? darkMode
+                        ? 'bg-green-600 text-white shadow-lg'
+                        : 'bg-green-500 text-white shadow-md'
+                      : darkMode 
+                        ? 'bg-gray-700 text-gray-300 hover:bg-gray-600 border border-gray-600' 
+                        : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 shadow-sm'
+                  }`}
+                >
+                  <span>🎉</span>
+                  <span>Fun Facts</span>
                 </button>
               </div>
             </div>
@@ -427,6 +517,84 @@ const TemperatureConverter = () => {
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Fun Facts Popup */}
+        {showCredits && (
+          <>
+            {/* Overlay */}
+            <div 
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-all duration-300 ease-in-out"
+              onClick={() => setShowCredits(false)}
+            />
+            
+            {/* Popup */}
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <div className={`max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-xl border shadow-2xl transform transition-all duration-300 ease-out scale-100 ${
+                darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+              }`}>
+                <div className={`px-6 py-4 border-b flex items-center justify-between ${
+                  darkMode ? 'bg-green-600 border-green-500' : 'bg-green-500 border-green-400'
+                }`}>
+                  <h3 className="text-white font-semibold flex items-center gap-2">
+                    <span>🎉</span>
+                    <span>Temperature Fun Facts</span>
+                  </h3>
+                  <button
+                    onClick={() => setShowCredits(false)}
+                    className="text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+                  <div className="grid gap-4">
+                    {temperatureFunFacts.map((funFact, index) => (
+                      <div 
+                        key={index} 
+                        className={`p-4 rounded-lg border transform transition-all duration-300 ease-out hover:scale-[1.02] ${
+                          darkMode ? 'bg-gray-700/50 border-gray-600 hover:bg-gray-700' : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                        }`}
+                        style={{
+                          animationDelay: `${index * 100}ms`,
+                          animation: 'slideInUp 0.5s ease-out forwards'
+                        }}
+                      >
+                        <div className="flex items-start gap-3">
+                          <span className="text-2xl flex-shrink-0">{funFact.emoji}</span>
+                          <p className={`text-sm leading-relaxed ${
+                            darkMode ? 'text-gray-300' : 'text-gray-700'
+                          }`}>
+                            {funFact.fact}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* Random fact button */}
+                  <div className="mt-6 text-center">
+                    <button
+                      onClick={() => {
+                        const randomIndex = Math.floor(Math.random() * temperatureFunFacts.length);
+                        const randomFact = temperatureFunFacts[randomIndex];
+                        alert(`${randomFact.emoji} ${randomFact.fact}`);
+                      }}
+                      className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                        darkMode 
+                          ? 'bg-green-600 hover:bg-green-500 text-white shadow-lg hover:shadow-xl' 
+                          : 'bg-green-500 hover:bg-green-600 text-white shadow-md hover:shadow-lg'
+                      }`}
+                    >
+                      🎲 Random Fun Fact
+                    </button>
                   </div>
                 </div>
               </div>
@@ -645,52 +813,6 @@ const TemperatureConverter = () => {
               </span>
             </button>
             
-            {/* Credits Toggle */}
-            <div className={`mt-6 pt-4 text-center border-t ${
-              darkMode ? 'border-gray-700' : 'border-gray-200'
-            }`}>
-              <button
-                onClick={() => setShowCredits(!showCredits)}
-                className={`text-sm font-medium transition-colors duration-200 cursor-pointer ${ 
-                  darkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                {showCredits ? 'Hide Credits' : 'Show Credits'}
-              </button>
-              
-              {showCredits && (
-                <div className={`mt-3 transition-all duration-300 ease-in-out ${
-                  showCredits ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
-                }`}>
-                  <p className={`text-sm ${
-                    darkMode ? 'text-gray-400' : 'text-gray-500'
-                  }`}>
-                    Built with ❤️ by{' '}
-                    <a 
-                      href="https://github.com/farkhanmaul" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className={`font-medium hover:underline ${
-                        darkMode ? 'text-blue-400' : 'text-blue-600'
-                      }`}
-                    >
-                      @farkhanmaul
-                    </a>
-                    {' '}and powered by{' '}
-                    <a 
-                      href="https://claude.ai" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className={`font-medium hover:underline ${
-                        darkMode ? 'text-purple-400' : 'text-purple-600'
-                      }`}
-                    >
-                      Claude AI
-                    </a>
-                  </p>
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </div>
