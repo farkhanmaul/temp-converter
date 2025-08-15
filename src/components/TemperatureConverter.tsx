@@ -247,44 +247,49 @@ const TemperatureConverter = () => {
       </div>
       
       {/* Main Title - Outside of card */}
-      <div className="text-center mb-8 max-w-4xl w-full mx-auto">
-        <h1 className={`text-3xl sm:text-4xl font-bold mb-3 transition-colors duration-300 ${
+      <div className="text-center mb-6 sm:mb-8 max-w-4xl w-full mx-auto px-4">
+        <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 transition-colors duration-300 ${
           darkMode ? 'text-white' : 'text-gray-900'
         }`}>
           🌡️ Temperature Converter
         </h1>
-        <p className={`text-sm sm:text-lg transition-colors duration-300 ${
+        <p className={`text-sm sm:text-base lg:text-lg transition-colors duration-300 ${
           darkMode ? 'text-gray-400' : 'text-gray-600'
         }`}>
           Convert temperatures instantly & accurately
         </p>
         {/* Small Credits */}
-        <p className={`text-xs mt-2 transition-colors duration-300 ${
+        <div className={`text-xs sm:text-sm mt-2 transition-colors duration-300 ${
           darkMode ? 'text-gray-500' : 'text-gray-400'
         }`}>
-          Built by{' '}
-          <a 
-            href="https://github.com/farkhanmaul" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className={`font-medium hover:underline transition-colors ${
-              darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
-            }`}
-          >
-            @farkhanmaul
-          </a>
-          {' '}• Powered by{' '}
-          <a 
-            href="https://claude.ai" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className={`font-medium hover:underline transition-colors ${
-              darkMode ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'
-            }`}
-          >
-            Claude AI
-          </a>
-        </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+            <span>Built by{' '}
+              <a 
+                href="https://github.com/farkhanmaul" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={`font-medium hover:underline transition-colors ${
+                  darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
+                }`}
+              >
+                @farkhanmaul
+              </a>
+            </span>
+            <span className="hidden sm:inline">•</span>
+            <span>Powered by{' '}
+              <a 
+                href="https://claude.ai" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={`font-medium hover:underline transition-colors ${
+                  darkMode ? 'text-purple-400 hover:text-purple-300' : 'text-purple-600 hover:text-purple-700'
+                }`}
+              >
+                Claude AI
+              </a>
+            </span>
+          </div>
+        </div>
       </div>
 
       <div className="max-w-4xl w-full mx-auto">
@@ -738,21 +743,20 @@ const TemperatureConverter = () => {
                   <div className={`rounded-lg border overflow-hidden opacity-0 animate-slideInUp ${
                     darkMode ? 'border-gray-600' : 'border-gray-300'
                   }`} style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-                    <div className="overflow-x-auto">
-                      <div className={`max-h-80 overflow-y-auto ${
-                        darkMode ? 'bg-gray-700' : 'bg-gray-50'
-                      }`}>
-                        <table className="w-full text-sm min-w-full">
-                          <thead className={`sticky top-0 z-10 ${
-                            darkMode ? 'bg-gray-800 shadow-md' : 'bg-gray-200 shadow-sm'
-                          }`}>
-                            <tr>
-                              <th className={`px-3 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>Celsius</th>
-                              <th className={`px-3 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>Fahrenheit</th>
-                              <th className={`px-3 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>Kelvin</th>
-                              <th className={`px-3 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>Réaumur</th>
-                            </tr>
-                          </thead>
+                    <div className={`max-h-80 overflow-y-auto ${
+                      darkMode ? 'bg-gray-700' : 'bg-gray-50'
+                    }`}>
+                      <table className="w-full text-sm">
+                        <thead className={`sticky top-0 z-10 ${
+                          darkMode ? 'bg-gray-800 shadow-md' : 'bg-gray-200 shadow-sm'
+                        }`}>
+                          <tr>
+                            <th className={`px-4 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>°C</th>
+                            <th className={`px-4 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>°F</th>
+                            <th className={`px-4 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>K</th>
+                            <th className={`px-4 py-4 text-left font-semibold border-b-2 ${darkMode ? 'text-white border-gray-600' : 'text-gray-900 border-gray-300'}`}>°Ré</th>
+                          </tr>
+                        </thead>
                         <tbody>
                           {generateRangeTable().map((row, index) => (
                             <tr 
@@ -767,18 +771,18 @@ const TemperatureConverter = () => {
                                 transform: 'scale(0.95)'
                               }}
                             >
-                              <td className={`px-3 py-3 font-medium transition-colors duration-200 whitespace-nowrap ${
+                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
                                 darkMode ? 'text-red-400' : 'text-red-600'
-                              }`}>{row.celsius}°C</td>
-                              <td className={`px-3 py-3 font-medium transition-colors duration-200 whitespace-nowrap ${
+                              }`}>{row.celsius}</td>
+                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
                                 darkMode ? 'text-blue-400' : 'text-blue-600'
-                              }`}>{row.fahrenheit}°F</td>
-                              <td className={`px-3 py-3 font-medium transition-colors duration-200 whitespace-nowrap ${
+                              }`}>{row.fahrenheit}</td>
+                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
                                 darkMode ? 'text-gray-300' : 'text-gray-700'
-                              }`}>{row.kelvin}K</td>
-                              <td className={`px-3 py-3 font-medium transition-colors duration-200 whitespace-nowrap ${
+                              }`}>{row.kelvin}</td>
+                              <td className={`px-4 py-3 font-medium transition-colors duration-200 ${
                                 darkMode ? 'text-yellow-400' : 'text-yellow-600'
-                              }`}>{row.reamur}°Ré</td>
+                              }`}>{row.reamur}</td>
                             </tr>
                           ))}
                         </tbody>
