@@ -247,25 +247,25 @@ const TemperatureConverter = () => {
       </div>
       
       {/* Main Content Container */}
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-4 max-w-4xl">
         {/* Main Title - At the top */}
-        <div className="text-center mb-8">
-        <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 transition-colors duration-300 ${
+        <div className="text-center mb-4">
+        <h1 className={`text-xl sm:text-2xl lg:text-3xl font-bold mb-1 transition-colors duration-300 ${
           darkMode ? 'text-white' : 'text-gray-900'
         }`}>
           🌡️ Temperature Converter
         </h1>
-        <p className={`text-sm sm:text-base lg:text-lg transition-colors duration-300 ${
+        <p className={`text-xs sm:text-sm lg:text-base transition-colors duration-300 ${
           darkMode ? 'text-gray-400' : 'text-gray-600'
         }`}>
           Convert temperatures instantly & accurately
         </p>
         {/* Small Credits */}
-        <div className={`text-xs sm:text-sm mt-2 transition-colors duration-300 ${
+        <div className={`text-xs mt-1 transition-colors duration-300 ${
           darkMode ? 'text-gray-500' : 'text-gray-400'
         }`}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
-            <span>Built by{' '}
+          <div className="flex flex-row items-center justify-center gap-1">
+            <span>by{' '}
               <a 
                 href="https://github.com/farkhanmaul" 
                 target="_blank" 
@@ -277,8 +277,8 @@ const TemperatureConverter = () => {
                 @farkhanmaul
               </a>
             </span>
-            <span className="hidden sm:inline">•</span>
-            <span>Powered by{' '}
+            <span>•</span>
+            <span>
               <a 
                 href="https://claude.ai" 
                 target="_blank" 
@@ -295,26 +295,26 @@ const TemperatureConverter = () => {
       </div>
 
         {/* Main Input Card */}
-        <div className={`rounded-xl shadow-lg border p-4 sm:p-6 transition-all duration-300 ${
+        <div className={`rounded-xl shadow-lg border p-4 transition-all duration-300 ${
           darkMode 
             ? 'bg-gray-800 border-gray-700' 
             : 'bg-white border-gray-200'
         }`}>
           {/* Input and Unit Selection - Stack on mobile */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Temperature Input Section */}
-            <div className="space-y-4">
+            <div className="space-y-2">
               <label className={`block text-sm font-medium ${
                 darkMode ? 'text-white' : 'text-gray-700'
               }`}>
-                Enter Temperature Value
+                Temperature Value
               </label>
               <input
                 type="number"
                 value={inputValue}
                 onChange={(e) => handleInputChange(e.target.value)}
                 placeholder="Enter value"
-                className={`w-full px-4 py-3 border rounded-lg transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-lg ${
+                className={`w-full px-3 py-2 border rounded-lg transition-all duration-300 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 ${
                   darkMode 
                     ? 'bg-white/10 border-white/30 text-white placeholder-gray-300' 
                     : 'bg-white/90 border-gray-300 text-gray-800 placeholder-gray-500'
@@ -376,7 +376,7 @@ const TemperatureConverter = () => {
             </div>
 
             {/* Unit Selection Section */}
-            <div className="space-y-4">
+            <div className="space-y-2">
               <label className={`block text-sm font-medium ${
                 darkMode ? 'text-white' : 'text-gray-700'
               }`}>
@@ -387,7 +387,7 @@ const TemperatureConverter = () => {
                   <button
                     key={unit}
                     onClick={() => handleUnitChange(unit)}
-                    className={`py-3 px-4 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
+                    className={`py-2 px-3 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
                       fromUnit === unit
                         ? 'bg-blue-500 text-white shadow-md transform scale-105'
                         : darkMode
@@ -399,14 +399,14 @@ const TemperatureConverter = () => {
                   </button>
                 ))}
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <button
                   onClick={() => {
                     setShowRangeTable(!showRangeTable);
                     if (showInfo) setShowInfo(false);
                     if (showCredits) setShowCredits(false);
                   }}
-                  className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all text-sm cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-sm cursor-pointer ${
                     showRangeTable 
                       ? darkMode
                         ? 'bg-blue-600 text-white shadow-lg'
@@ -426,7 +426,7 @@ const TemperatureConverter = () => {
                     if (showRangeTable) setShowRangeTable(false);
                     if (showCredits) setShowCredits(false);
                   }}
-                  className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all text-sm cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-sm cursor-pointer ${
                     showInfo 
                       ? darkMode
                         ? 'bg-purple-600 text-white shadow-lg'
@@ -446,7 +446,7 @@ const TemperatureConverter = () => {
                     if (showRangeTable) setShowRangeTable(false);
                     if (showInfo) setShowInfo(false);
                   }}
-                  className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all text-sm cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 px-3 py-2 rounded-lg font-medium transition-all text-sm cursor-pointer ${
                     showCredits 
                       ? darkMode
                         ? 'bg-green-600 text-white shadow-lg'
