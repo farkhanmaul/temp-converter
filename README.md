@@ -10,6 +10,7 @@ A simple, responsive temperature converter built with Next.js and Tailwind CSS. 
 - 📱 Fully responsive design
 - ⚡ Built with Next.js and TypeScript
 - 🚀 Ready for GitHub Pages deployment
+- 🎯 Custom favicon with thermometer design
 
 ## Tech Stack
 
