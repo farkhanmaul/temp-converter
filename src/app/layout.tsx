@@ -24,12 +24,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
-      { url: '/favicon.svg', type: 'image/svg+xml' }
+      { url: '/temp-converter/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/temp-converter/favicon.svg', type: 'image/svg+xml' }
     ],
-    shortcut: '/favicon.ico',
+    shortcut: '/temp-converter/favicon.ico',
     apple: [
-      { url: '/favicon.svg', sizes: '180x180', type: 'image/svg+xml' }
+      { url: '/temp-converter/favicon.svg', sizes: '180x180', type: 'image/svg+xml' }
     ],
   },
 };
@@ -41,6 +41,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" type="image/x-icon" href="/temp-converter/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/temp-converter/favicon.svg" />
+        <link rel="shortcut icon" href="/temp-converter/favicon.ico" />
+        <link rel="apple-touch-icon" href="/temp-converter/favicon.svg" />
+      </head>
       <body className="antialiased" suppressHydrationWarning>
         {children}
       </body>
